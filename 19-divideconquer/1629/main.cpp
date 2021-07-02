@@ -17,7 +17,7 @@ using namespace std;
 
 #define MAX		1000000
 
-unsigned long long m, n, t, k;
+unsigned long long m, n, t;
 int arr[MAX + 1];
 
 void setup() {
@@ -28,7 +28,26 @@ void setup() {
 	cout << setprecision(10);
 }
 
+unsigned long long modpow(unsigned long long base, 
+			unsigned long long exp, unsigned long long modulus) {
+	unsigned long long result = 1;
+
+	base %= modulus;
+	while (exp > 0) {
+		if (exp & 1) {
+			result = (result * base) % modulus;
+		}
+		base = (base * base) % modulus;
+		exp >>= 1;
+	}
+	return result % modulus;
+}
+
 int main() {
+	unsigned long long a, b, c;
+
 	setup();
+	cin >> a >> b >> c;
+	cout << modpow(a, b, c) << "\n";
 	return 0;
 }
