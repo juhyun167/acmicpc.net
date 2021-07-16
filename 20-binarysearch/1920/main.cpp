@@ -1,15 +1,12 @@
 #include <iostream>
 #include <sstream>
 #include <cctype>
-#include <cstdint>
 #include <locale>
 #include <algorithm>
 #include <cmath>
 #include <numeric>
 #include <climits>
 #include <vector>
-#include <map>
-#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <tuple>
@@ -20,7 +17,7 @@ using namespace std;
 
 #define MAX		1000000
 
-uint64_t m, n, t, k;
+unsigned long long m, n, t, k;
 int arr[MAX + 1];
 
 void setup() {
@@ -32,23 +29,22 @@ void setup() {
 }
 
 int main() {
-	map<int, int, greater<int>> map;
-
 	setup();
 	cin >> n;
 	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	map.insert(1, 0);
-	for (int i = 1; i < n; i++) {
-		for (const auto el : map) {
-			if (arr[el.second] < arr[i]) {
-				map.insert(el.first + 1, i);
-				break;
-			}
+	sort(arr, arr + n);
+	cin >> m;
+	for (int i = 0; i < m; i++) {
+		int x;
+
+		cin >> x;	
+		if (binary_search(arr, arr + n, x)) {
+			cout << "1\n";
+		} else {
+			cout << "0\n";
 		}
 	}
-	cout << map.begin()->first << "\n";
 	return 0;
 }
-

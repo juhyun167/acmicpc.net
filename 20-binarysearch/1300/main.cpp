@@ -8,8 +8,6 @@
 #include <numeric>
 #include <climits>
 #include <vector>
-#include <map>
-#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <tuple>
@@ -31,24 +29,31 @@ void setup() {
 	cout << setprecision(10);
 }
 
-int main() {
-	map<int, int, greater<int>> map;
+uint64_t count(uint64_t num) {
+	uint64_t cnt = 0;
 
-	setup();
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
+	for (int i = 1; i <= n; i++) {
+		cnt += min(num / i, n);
 	}
-	map.insert(1, 0);
-	for (int i = 1; i < n; i++) {
-		for (const auto el : map) {
-			if (arr[el.second] < arr[i]) {
-				map.insert(el.first + 1, i);
-				break;
-			}
-		}
-	}
-	cout << map.begin()->first << "\n";
-	return 0;
+	return cnt;
 }
 
+uint64_t search(uint64_t left, uint64_t right) {
+	uint64_t mid = (left + right) / 2;
+
+	if (left >= right) {
+		return left;
+	}
+	if (count(mid) < k) {
+		return search(mid + 1, right);
+	} else {
+		return search(left, mid);
+	}
+}
+
+int main() {
+	setup();
+	cin >> n >> k;
+	cout << search(1, n * n) << "\n";
+	return 0;
+}

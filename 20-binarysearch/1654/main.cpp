@@ -8,8 +8,6 @@
 #include <numeric>
 #include <climits>
 #include <vector>
-#include <map>
-#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <tuple>
@@ -21,7 +19,7 @@ using namespace std;
 #define MAX		1000000
 
 uint64_t m, n, t, k;
-int arr[MAX + 1];
+uint64_t arr[MAX + 1];
 
 void setup() {
 	ios_base::sync_with_stdio(false);
@@ -31,24 +29,40 @@ void setup() {
 	cout << setprecision(10);
 }
 
-int main() {
-	map<int, int, greater<int>> map;
+bool test(int x) {
+	uint64_t sum = 0;
 
-	setup();
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
+	for (int i = 0; i < k; i++) {
+		sum += arr[i] / x;
 	}
-	map.insert(1, 0);
-	for (int i = 1; i < n; i++) {
-		for (const auto el : map) {
-			if (arr[el.second] < arr[i]) {
-				map.insert(el.first + 1, i);
-				break;
-			}
-		}
-	}
-	cout << map.begin()->first << "\n";
-	return 0;
+	return sum >= n;
 }
 
+uint64_t search(uint64_t left, uint64_t right) {
+	uint64_t mid = (left + right) / 2 + 1;
+	
+	if (left >= right) {
+		return left;
+	}
+	if (!test(mid)) {
+		return search(left, mid - 1);
+	} else {
+		return search(mid, right);
+	}
+}
+
+int main() {
+	uint64_t left, right;
+
+	setup();
+	cin >> k >> n;
+	for (int i = 0; i < k; i++) {
+		cin >> arr[i];
+	}
+	sort(arr, arr + k);
+
+	left = 1;
+	right = INT_MAX;
+	cout << search(left, right) << "\n";
+	return 0;
+}
