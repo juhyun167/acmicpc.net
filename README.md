@@ -13,6 +13,7 @@ Solutions for problems I solved in [Baekjoon Online Judge](https://www.acmicpc.n
 - [**Templates**](#templates)
     - [What is in template directory?](#what-is-in-template-directory)
     - [How to create new directories?](#how-to-create-new-directories)
+    - [Linux Templates](#linux-templates)
 
 
 ## **Description**
@@ -51,3 +52,17 @@ code .
 ```
 
 then press `F5` to build. Note that you must use Developer Powershell for VS 2019 otherwise you would fail with the builds.
+
+### Linux Templates
+
+Recently, I added templates for `clang++` as I begin to use Ubuntu Desktop. They are in `template_lin` directory and the usage is same. 
+
+However, there are some prerequisites. First, you need to install `clang`, `lld`, `lldb` and Libc package for clang. 
+
+```bash
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+sudo apt-get install clang-12 lldb-12 lld-12
+sudo apt-get install libc++-12-dev libc++abi-12-dev
+```
+
+Then, install [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) plugin for VSCode. This way, you will be able to build and debug easily with STL container supports.
