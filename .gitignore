@@ -36,6 +36,9 @@
 *.out
 *.app
 
+# For clang on linux
+main
+
 ### VisualStudioCode ###
 **/.vscode/*
 **/.vscode/settings.json
