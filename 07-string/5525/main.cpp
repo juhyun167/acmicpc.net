@@ -33,7 +33,26 @@ void setup() {
 }
 
 int main() {
+	string s, p;
+	int cnt = 0, num = 0;
+
 	setup();
+	cin >> n >> m >> s;
+
+	for (int i = 0; i < m - 2; i++) {
+		if (s[i] == 'I' && s[i + 1] == 'O'
+				&& s[i + 2] == 'I') {
+			num++;
+			if (num == n) {
+				cnt++;
+				num--;
+			}
+			i++;
+		} else {
+			num = 0;
+		}
+	}
+	cout << cnt << "\n";
 
 	return 0;
 }

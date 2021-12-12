@@ -33,7 +33,20 @@ void setup() {
 }
 
 int main() {
+	unordered_map<string, string> umap;
+	string s1, s2;
+
 	setup();
+	cin >> n >> m;
+
+	for (int i = 0; i < n; i++) {
+		cin >> s1 >> s2;
+		umap[s1] = s2;
+	}
+	for (int i = 0; i < m; i++) {
+		cin >> s1;
+		cout << umap[s1] << "\n";
+	}
 
 	return 0;
 }

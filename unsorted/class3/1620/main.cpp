@@ -15,14 +15,13 @@
 #include <tuple>
 #include <stack>
 #include <queue>
-#include <list>
 #include <iomanip>
 using namespace std;
 
-#define MAX		(1000000 + 1)
+#define MAX		1000000
 
-uint64_t m, n, t, k, v;
-int arr[MAX];
+uint64_t m, n, t, k;
+int arr[MAX + 1];
 
 void setup() {
 	ios_base::sync_with_stdio(false);
@@ -33,7 +32,24 @@ void setup() {
 }
 
 int main() {
+	unordered_map<string, string> umap;
+	string s;
+
 	setup();
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++) {
+		cin >> s;
+		umap.insert(make_pair(to_string(i), s));
+		umap.insert(make_pair(s, to_string(i)));
+	}
+	while (m--) {
+		unordered_map<string, string>::iterator iter;
+
+		cin >> s;
+		if ((iter = umap.find(s)) != umap.end()) {
+			cout << iter->second << "\n";
+		}
+	}
 
 	return 0;
 }

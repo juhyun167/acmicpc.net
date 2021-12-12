@@ -22,7 +22,7 @@ using namespace std;
 #define MAX		(1000000 + 1)
 
 uint64_t m, n, t, k, v;
-int arr[MAX];
+int arr[MAX], sum[MAX];
 
 void setup() {
 	ios_base::sync_with_stdio(false);
@@ -34,6 +34,18 @@ void setup() {
 
 int main() {
 	setup();
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++) {
+		cin >> arr[i];
+		sum[i] = arr[i] + sum[i - 1];
+	}
+
+	while (m--) {
+		int i, j;
+
+		cin >> i >> j;
+		cout << sum[j] - sum[i - 1] << "\n";
+	}
 
 	return 0;
 }

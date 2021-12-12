@@ -15,13 +15,14 @@
 #include <tuple>
 #include <stack>
 #include <queue>
+#include <list>
 #include <iomanip>
 using namespace std;
 
-#define MAX		1000000
+#define MAX		(1000000 + 1)
 
-uint64_t m, n, t, k;
-int arr[MAX + 1];
+uint64_t m, n, t, k, v;
+int arr[MAX];
 
 void setup() {
 	ios_base::sync_with_stdio(false);
@@ -33,5 +34,6 @@ void setup() {
 
 int main() {
 	setup();
+
 	return 0;
 }
