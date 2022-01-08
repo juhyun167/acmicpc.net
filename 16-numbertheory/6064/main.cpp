@@ -21,7 +21,7 @@ using namespace std;
 
 #define MAX		(1000000 + 1)
 
-int m, n, t, k;
+int m, n, t, k, v;
 int arr[MAX];
 
 void setup() {
@@ -32,8 +32,34 @@ void setup() {
 	cout << setprecision(10);
 }
 
+inline bool check(int k, int m, int n, int x, int y) {
+	return k % m == x % m && k % n == y % n;
+}
+
 int main() {
 	setup();
+	cin >> t;
+	while (t--) {
+		int x, y, d, l;
+
+		cin >> m >> n >> x >> y;
+		if (x < y) {
+			swap(x, y);
+			swap(m, n);
+		}
+		d = gcd(m, n);
+		l = m * n / d;
+
+		for (int k = x; k <= l; k += m) {
+			if (check(k, m, n, x, y)) {
+				cout << k << "\n";
+				goto Found;
+			}
+		}
+		cout << "-1\n";
+Found:
+		continue;
+	}
 
 	return 0;
 }

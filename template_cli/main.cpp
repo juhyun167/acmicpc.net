@@ -21,7 +21,7 @@ using namespace std;
 
 #define MAX		(1000000 + 1)
 
-uint64_t m, n, t, k, v;
+int m, n, t, k, v;
 int arr[MAX];
 
 void setup() {
