@@ -16,14 +16,15 @@
 #include <stack>
 #include <queue>
 #include <list>
-#include <utility>
 #include <iomanip>
 using namespace std;
 
-#define MAX		(1000000 + 1)
+#define MAX		(100000 + 1)
 
 int m, n, t, k, v;
-int arr[MAX];
+vector<int> adj[MAX];
+vector<int> parent(MAX);
+bool visited[MAX];
 
 void setup() {
 	ios_base::sync_with_stdio(false);
@@ -33,8 +34,38 @@ void setup() {
 	cout << setprecision(10);
 }
 
+void dfs(int u) {
+	for (const int& w : adj[u]) {
+		if (!visited[w]) {
+			visited[w] = true;
+			parent[w] = u;
+			dfs(w);
+		}
+	}
+}
+
 int main() {
 	setup();
+	cin >> n;
+	for (int i = 0; i < n - 1; i++) {
+		int s, t;
+
+		cin >> s >> t;
+		adj[s].emplace_back(t);
+		adj[t].emplace_back(s);
+	}
+
+	for (int i = 1; i <= n; i++) {
+		if (!visited[i]) {
+			visited[i] = true;
+			dfs(i);
+		}
+	}
+
+	for (int i = 2; i <= n; i++) {
+		cout << parent[i] << "\n";
+	}
 
 	return 0;
+
 }

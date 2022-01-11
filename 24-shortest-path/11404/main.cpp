@@ -20,10 +20,10 @@
 using namespace std;
 
 #define MAX		(100 + 1)
-#define INF		(INT_MAX / 2)
 
 int m, n, t, k, v;
 int arr1[MAX][MAX], arr2[MAX][MAX];
+const int INF = INT_MAX / 2;
 
 void setup() {
 	ios_base::sync_with_stdio(false);
@@ -34,25 +34,29 @@ void setup() {
 }
 
 int main() {
-	int (*d1)[MAX] = arr1;
-	int (*d2)[MAX] = arr2;
+	int (*d1)[MAX] = arr1, (*d2)[MAX] = arr2;
 
 	setup();
-	cin >> n;
-	fill_n(&d1[0][0], MAX * MAX, INF);
+	cin >> n >> m;
+
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			cin >> d1[i][j];
-			if (d1[i][j] == 0) {
-				d1[i][j] = INF;
-			}
+			arr1[i][j] = INF;
 		}
 	}
-	
+	for (int i = 0; i < m; i++) {
+		int a, b, c;
+		
+		cin >> a >> b >> c;
+		arr1[a - 1][b - 1] = min(arr1[a - 1][b - 1], c);
+	}
+
 	for (int k = 0; k < n; k++) {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				d2[i][j] = min(d1[i][j], d1[i][k] + d1[k][j]);
+				if (i != j) {
+					d2[i][j] = min(d1[i][j], d1[i][k] + d1[k][j]);
+				}
 			}
 		}
 		swap(d1, d2);
@@ -60,10 +64,10 @@ int main() {
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			if (0 < d1[i][j] && d1[i][j] < INF) {
-				cout << "1 ";
-			} else {
+			if (d1[i][j] == INF) {
 				cout << "0 ";
+			} else {
+				cout << d1[i][j] << " ";
 			}
 		}
 		cout << "\n";
